@@ -22,3 +22,8 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# My MD files
+AGENTS.md
+CLAUDE.md
+RADWA_BOOK_ME_IMPLEMENTATION.md
