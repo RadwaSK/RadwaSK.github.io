@@ -1,0 +1,166 @@
+---
+// Skills section
+---
+
+<section id="skills" class="skills">
+  <div class="skills-container">
+    <h2>Skills & Expertise</h2>
+    <p class="section-intro">Technical capabilities across AI, cloud, and full-stack development</p>
+
+    <div class="skills-grid">
+      <div class="skill-category">
+        <h3>AI & Machine Learning</h3>
+        <ul class="skill-list">
+          <li>LLMs & Generative AI</li>
+          <li>Prompt Engineering & Agents</li>
+          <li>PyTorch, TensorFlow, Keras</li>
+          <li>NLP & Computer Vision</li>
+          <li>Model Development & Evaluation</li>
+          <li>Production ML Systems</li>
+        </ul>
+      </div>
+
+      <div class="skill-category">
+        <h3>Cloud & MLOps Infrastructure</h3>
+        <ul class="skill-list">
+          <li>Azure (DataFactory, AutoML, Databricks)</li>
+          <li>Docker & Container Orchestration</li>
+          <li>CI/CD Pipelines & Automation</li>
+          <li>MLFlow, DVC Model Management</li>
+          <li>Azure ML Pipelines</li>
+          <li>Infrastructure Optimization & Cost Reduction</li>
+        </ul>
+      </div>
+
+      <div class="skill-category">
+        <h3>Backend & Data Engineering</h3>
+        <ul class="skill-list">
+          <li>Python, C++, C#, JavaScript, TypeScript</li>
+          <li>FastAPI, Flask, .NET</li>
+          <li>PostgreSQL & Database Design</li>
+          <li>REST APIs & Secure Workflows</li>
+          <li>Data Pipelines & ETL</li>
+          <li>PySpark & Large-Scale Data Processing</li>
+        </ul>
+      </div>
+
+      <div class="skill-category">
+        <h3>Advanced AI Architectures</h3>
+        <ul class="skill-list">
+          <li>Retrieval-Augmented Generation (RAG)</li>
+          <li>Vector Databases & Embeddings</li>
+          <li>Multi-Agent Systems</li>
+          <li>Fine-tuning & Small Language Models</li>
+          <li>Structured Output & Intent Detection</li>
+          <li>Semantic Kernel & LLM Orchestration</li>
+        </ul>
+      </div>
+
+      <div class="skill-category">
+        <h3>Data Analysis & Visualization</h3>
+        <ul class="skill-list">
+          <li>PowerBI & Analytics Dashboards</li>
+          <li>Pandas, NumPy, SciPy</li>
+          <li>Anomaly Detection & Monitoring</li>
+          <li>SQL Analytics & Query Optimization</li>
+          <li>Statistical Analysis</li>
+          <li>R & Advanced Data Science</li>
+        </ul>
+      </div>
+
+      <div class="skill-category">
+        <h3>Development Tools & Practices</h3>
+        <ul class="skill-list">
+          <li>Git, GitHub, GitLab, Azure DevOps</li>
+          <li>Linux & System Administration</li>
+          <li>CUDA & GPU Computing</li>
+          <li>LaTeX, Technical Documentation</li>
+          <li>Postman & API Testing</li>
+          <li>OpenCV & Image Processing</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills {
+    padding: 5rem 1.5rem;
+    background: white;
+  }
+
+  .skills-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .skills h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 1rem 0;
+    color: #0f0f1e;
+  }
+
+  .section-intro {
+    text-align: center;
+    color: #666;
+    font-size: 1.125rem;
+    margin: 0 0 3rem 0;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .skill-category {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    border-left: 4px solid #64d5ff;
+  }
+
+  .skill-category h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 1.5rem 0;
+    color: #0f0f1e;
+  }
+
+  .skill-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .skill-list li {
+    padding: 0.5rem 0;
+    color: #666;
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .skill-list li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #64d5ff;
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    .skills {
+      padding: 3rem 1.5rem;
+    }
+
+    .skills h2 {
+      font-size: 2rem;
+    }
+
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

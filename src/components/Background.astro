@@ -1,0 +1,228 @@
+---
+// Background and education section
+---
+
+<section id="background" class="background">
+  <div class="background-container">
+    <h2>Background & Education</h2>
+    <p class="section-intro">Advanced training and teaching experience</p>
+
+    <div class="education-section">
+      <h3>Education</h3>
+      <div class="education-items">
+        <div class="education-item">
+          <h4>Master of Science in Informatics</h4>
+          <p class="institution">Cairo University (2022–2026)</p>
+          <p class="details">
+            Specialization in Computer Engineering. GPA: 3.1<br>
+            Coursework: Advanced NLP, Reinforcement Learning, Data Analytics, Machine Learning, 
+            Computer Vision, Advanced Image Processing, Neural Networks
+          </p>
+        </div>
+
+        <div class="education-item">
+          <h4>Bachelor of Science in Computer Engineering</h4>
+          <p class="institution">Cairo University (2021)</p>
+          <p class="details">
+            Grade: Excellent · Graduation Project Grade: Excellent
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="teaching-section" style="display: none;">
+      <h3>Teaching Experience</h3>
+      <div class="teaching-items">
+        <div class="teaching-item">
+          <p><strong>Session Lead</strong> — Udacity (Oct 2022 — Sept 2023)</p>
+        </div>
+        <div class="teaching-item">
+          <p><strong>Teaching Assistant</strong> — Cairo University (Feb 2023 — May 2023)</p>
+        </div>
+        <div class="teaching-item">
+          <p><strong>Teaching Assistant</strong> — Nile University (Feb 2022 — Aug 2022)</p>
+        </div>
+        <div class="teaching-item">
+          <p><strong>Machine Learning Instructor</strong> — AMIT Learning (Feb 2022 — Mar 2022)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="publications-section">
+      <h3>Publications</h3>
+      <div class="publication-item">
+        <p>
+          <strong>ViTCN: Hybrid Vision Transformer with Temporal Convolution for Multi-Emotion Recognition</strong><br>
+          View on <a href="https://scholar.google.com/citations?user=40VrQxEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">
+            Google Scholar
+          </a>
+        </p>
+      </div>
+    </div>
+
+    <div class="languages-section">
+      <h3>Languages</h3>
+      <div class="language-list">
+        <div class="language-item">
+          <p><strong>English:</strong> Advanced (TOEFL C1)</p>
+        </div>
+        <div class="language-item">
+          <p><strong>Arabic:</strong> Native</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .background {
+    padding: 5rem 1.5rem;
+    background: white;
+  }
+
+  .background-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .background h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 1rem 0;
+    color: #0f0f1e;
+  }
+
+  .section-intro {
+    text-align: center;
+    color: #666;
+    font-size: 1.125rem;
+    margin: 0 0 3rem 0;
+  }
+
+  .education-section,
+  .teaching-section,
+  .publications-section,
+  .languages-section {
+    margin-bottom: 3rem;
+  }
+
+  .education-section h3,
+  .teaching-section h3,
+  .publications-section h3,
+  .languages-section h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 1.5rem 0;
+    color: #0f0f1e;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #64d5ff;
+  }
+
+  .education-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .education-item {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    border-left: 4px solid #64d5ff;
+  }
+
+  .education-item h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: #0f0f1e;
+  }
+
+  .institution {
+    color: #64d5ff;
+    font-weight: 500;
+    margin: 0 0 1rem 0;
+    font-size: 0.95rem;
+  }
+
+  .details {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .teaching-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .teaching-item {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid #64d5ff;
+  }
+
+  .teaching-item p {
+    margin: 0;
+    color: #333;
+  }
+
+  .publication-item {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    border-left: 4px solid #64d5ff;
+  }
+
+  .publication-item p {
+    margin: 0;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .publication-item a {
+    color: #64d5ff;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .publication-item a:hover {
+    text-decoration: underline;
+  }
+
+  .language-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .language-item {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid #64d5ff;
+  }
+
+  .language-item p {
+    margin: 0;
+    color: #333;
+  }
+
+  @media (max-width: 768px) {
+    .background {
+      padding: 3rem 1.5rem;
+    }
+
+    .background h2 {
+      font-size: 2rem;
+    }
+
+    .education-items {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

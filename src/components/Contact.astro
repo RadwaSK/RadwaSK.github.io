@@ -1,0 +1,227 @@
+---
+// Contact and CTA section
+---
+
+<section id="contact" class="contact">
+  <div class="contact-container">
+    <h2>Get In Touch</h2>
+    <p class="section-intro">Ready to collaborate? Let's talk.</p>
+
+    <div class="contact-content">
+      <div class="contact-info">
+        <h3>Connect With Me</h3>
+        <p>
+          Interested in freelance work, technical consulting, speaking engagements, or mentoring? 
+          I'd love to hear about your project or opportunity.
+        </p>
+
+        <div class="contact-methods">
+          <div class="method">
+            <span class="icon">📧</span>
+            <div>
+              <h4>Email</h4>
+              <p>
+                <a href="mailto:RadwaSM@hotmail.com">RadwaSM@hotmail.com</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="method">
+            <span class="icon">💼</span>
+            <div>
+              <h4>LinkedIn</h4>
+              <p>
+                <a href="https://linkedin.com/in/radwask" target="_blank" rel="noopener noreferrer">
+                  linkedin.com/in/radwask
+                </a>
+              </p>
+            </div>
+          </div>
+
+          <div class="method">
+            <span class="icon">📚</span>
+            <div>
+              <h4>Google Scholar</h4>
+              <p>
+                <a href="https://scholar.google.com/citations?user=40VrQxEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">
+                  View publications
+                </a>
+              </p>
+            </div>
+          </div>
+
+          <div class="method">
+            <span class="icon">📄</span>
+            <div>
+              <h4>Resume</h4>
+              <p>
+                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+                  Download CV (PDF)
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="booking-section">
+        <h3>Quick Meeting?</h3>
+        <p>
+          For a quick conversation, you can also book a time directly. I try to respond to inquiries 
+          within 24 hours.
+        </p>
+        <a href="https://calendly.com/radwa-s-khattab/project-collaboration-call" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Schedule A Call</a>
+      </div>
+    </div>
+
+    <div class="response-time">
+      <p>
+        <strong>Response time:</strong> I aim to respond to all inquiries within 24-48 hours.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    padding: 5rem 1.5rem;
+    background: #f8f9fa;
+  }
+
+  .contact-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .contact h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 1rem 0;
+    color: #0f0f1e;
+  }
+
+  .section-intro {
+    text-align: center;
+    color: #666;
+    font-size: 1.125rem;
+    margin: 0 0 3rem 0;
+  }
+
+  .contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .contact-info h3,
+  .booking-section h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+    color: #0f0f1e;
+  }
+
+  .contact-info p,
+  .booking-section p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .method {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 0.5rem;
+  }
+
+  .method .icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .method h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem 0;
+    color: #0f0f1e;
+  }
+
+  .method p {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .method a {
+    color: #64d5ff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+  }
+
+  .method a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
+
+  .booking-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.875rem 2rem;
+    background: linear-gradient(135deg, #64d5ff 0%, #4bb3ff 100%);
+    color: #0f0f1e;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(100, 213, 255, 0.3);
+  }
+
+  .response-time {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    text-align: center;
+    color: #666;
+    border-left: 4px solid #64d5ff;
+  }
+
+  .response-time p {
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .contact {
+      padding: 3rem 1.5rem;
+    }
+
+    .contact h2 {
+      font-size: 2rem;
+    }
+
+    .contact-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>

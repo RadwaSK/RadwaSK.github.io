@@ -1,0 +1,102 @@
+---
+// Hero section with call-to-action
+---
+
+<section class="hero">
+  <div class="hero-container">
+    <h2 class="hero-title">Senior AI Engineer & Data Scientist</h2>
+    <p class="hero-subtitle">
+      Building AI systems that work in production. Available for freelance projects, technical consulting, speaking engagements, and career mentoring.
+    </p>
+    <div class="cta-buttons">
+      <a href="#contact" class="btn btn-primary">Book a Project Call</a>
+      <a href="#work-style" class="btn btn-secondary">How I Work Best</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
+    color: white;
+    padding: 6rem 1.5rem;
+    text-align: center;
+  }
+
+  .hero-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    color: #b0b0c0;
+    margin: 0 0 2.5rem 0;
+    line-height: 1.6;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 0.875rem 2rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #64d5ff 0%, #4bb3ff 100%);
+    color: #0f0f1e;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(100, 213, 255, 0.3);
+  }
+
+  .btn-secondary {
+    border-color: #64d5ff;
+    color: #64d5ff;
+    background: transparent;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(100, 213, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 4rem 1.5rem;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>

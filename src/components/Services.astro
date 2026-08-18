@@ -1,0 +1,190 @@
+---
+// Work With Me section - three engagement models
+---
+
+<section id="services" class="services">
+  <div class="services-container">
+    <h2>How to Work With Me</h2>
+    <p class="section-intro">Three ways we can collaborate</p>
+    
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">💼</div>
+        <h3>Freelance & Consulting</h3>
+        <p class="service-rate">$20–$50/hour</p>
+        <p>
+          AI engineering, ML system architecture, production AI consulting, LLM applications, 
+          MLOps infrastructure, backend development, and technical leadership.
+        </p>
+        <ul class="service-highlights">
+          <li>30-minute project discussion to scope work</li>
+          <li>Flexible hourly or project-based rates</li>
+          <li>Part-time or full-project engagements</li>
+          <li>Architecture & code review support</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🎓</div>
+        <h3>CV & Career Guidance</h3>
+        <p class="service-rate">Free / Volunteer</p>
+        <p>
+          For students, graduates, and early-career professionals entering AI, data science, 
+          or software engineering.
+        </p>
+        <ul class="service-highlights">
+          <li>Resume & LinkedIn review & feedback</li>
+          <li>Positioning & job-search strategy</li>
+          <li>Async email/LinkedIn feedback</li>
+          <li>Optional 15-min follow-up call</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🎤</div>
+        <h3>Technical Speaking</h3>
+        <p class="service-rate">Flexible (Paid or Volunteer)</p>
+        <p>
+          Talks, workshops, and keynotes for universities, conferences, technical communities, 
+          and company events.
+        </p>
+        <ul class="service-highlights">
+          <li>Topics: Production AI, LLMs, MLOps, AI careers</li>
+          <li>Online or in-person (prefer: Cairo area)</li>
+          <li>30–60 minute sessions</li>
+          <li>Contact to discuss topics & logistics</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="availability-note">
+      <p>
+        <strong>Current Status:</strong> I'm actively exploring my next full-time opportunity 
+        while taking on selected freelance work. Any engagement is subject to availability 
+        and will be discontinued if required by a full-time employment agreement.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    padding: 5rem 1.5rem;
+    background: #f8f9fa;
+  }
+
+  .services-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .services h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 1rem 0;
+    color: #0f0f1e;
+  }
+
+  .section-intro {
+    text-align: center;
+    color: #666;
+    font-size: 1.125rem;
+    margin: 0 0 3rem 0;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .service-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .service-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .service-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: #0f0f1e;
+  }
+
+  .service-rate {
+    color: #64d5ff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin: 0 0 1rem 0;
+  }
+
+  .service-card p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .service-highlights {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .service-highlights li {
+    padding: 0.5rem 0;
+    color: #666;
+    font-size: 0.9rem;
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .service-highlights li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #64d5ff;
+    font-weight: bold;
+  }
+
+  .availability-note {
+    background: white;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    border-left: 4px solid #64d5ff;
+    text-align: center;
+  }
+
+  .availability-note p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .services {
+      padding: 3rem 1.5rem;
+    }
+
+    .services h2 {
+      font-size: 2rem;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
