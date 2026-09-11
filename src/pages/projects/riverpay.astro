@@ -6,8 +6,8 @@ import '../../styles/global.css';
 const title = 'RiverPay — Financial Exception Review Workflow | Radwa Khattab';
 const description =
   'A synthetic portfolio use case: a workflow-automation prototype where an LLM gathers evidence and calls read-only investigation tools while deterministic policy logic remains authoritative for the final financial-risk decision.';
-const canonicalUrl = 'https://radwakhattab.github.io/projects/riverpay';
-const ogImage = 'https://radwakhattab.github.io/og-image.png';
+const canonicalUrl = 'https://radwask.github.io/projects/riverpay';
+const ogImage = 'https://radwask.github.io/og-image.png';
 const repoUrl = 'https://github.com/RadwaSK/RiverPay-UseCase';
 
 const architecturePoints = [
@@ -31,8 +31,16 @@ const governancePoints = [
   'Uncertain or risky cases are escalated to a human rather than auto-resolved',
   'Escalations route to Fraud Ops, Compliance, Tech/Recon, or Agent Network depending on issue type',
   'Decisions are structured to be audit-oriented',
-  'A deterministic evaluation report is produced for review',
   'Residual risk is analyzed and surfaced rather than hidden',
+];
+
+const evaluationPoints = [
+  'Policy/decision correctness checked against a set of expected synthetic outcomes',
+  'Verifies that deterministic policy logic correctly overrides or resolves inappropriate or conflicting LLM proposals',
+  'Escalation and routing behavior — does an uncertain case reach the right operational team?',
+  'Evidence and tool-lookup behavior — are the read-only investigation tools actually being used?',
+  'A deterministic evaluation report is produced for each run for review',
+  'Regression behavior is checked across the supplied test scenarios',
 ];
 
 const notImplemented = [
@@ -118,12 +126,21 @@ const notImplemented = [
           <ul class="feature-list">
             {architecturePoints.map((point) => <li>{point}</li>)}
           </ul>
+
+          <div class="callout">
+            <span class="callout-label">Key Design Decision</span>
+            <p>
+              I intentionally used a hybrid architecture rather than making the LLM the final decision-maker.
+              The LLM handles investigation and evidence gathering, while deterministic policy logic enforces
+              precedence and the final operational decision.
+            </p>
+          </div>
         </div>
       </section>
 
       <section class="case-section">
         <div class="case-container">
-          <h2>Governance &amp; Evaluation</h2>
+          <h2>Governance</h2>
           <ul class="feature-list">
             {governancePoints.map((point) => <li>{point}</li>)}
           </ul>
@@ -132,6 +149,20 @@ const notImplemented = [
       </section>
 
       <section class="case-section case-section-alt">
+        <div class="case-container">
+          <h2>Evaluation</h2>
+          <p>
+            A synthetic evaluation workflow exercises the pipeline against a set of prepared scenarios rather than
+            live production traffic. It checks:
+          </p>
+          <ul class="feature-list">
+            {evaluationPoints.map((point) => <li>{point}</li>)}
+          </ul>
+          <p class="note">Results reflect behavior on the supplied synthetic fixtures, not production model-performance statistics.</p>
+        </div>
+      </section>
+
+      <section class="case-section">
         <div class="case-container">
           <h2>Limitations &amp; Disclosure</h2>
           <div class="disclosure-box">
@@ -282,6 +313,30 @@ const notImplemented = [
     color: #888;
     font-style: italic;
     margin-top: 1.25rem;
+  }
+
+  .callout {
+    background: #f0f8ff;
+    border-left: 4px solid #64d5ff;
+    border-radius: 0.5rem;
+    padding: 1.25rem 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .callout-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #1a5a8f;
+    margin-bottom: 0.5rem;
+  }
+
+  .callout p {
+    margin: 0;
+    color: #1a5a8f;
+    line-height: 1.6;
   }
 
   .architecture-diagram {

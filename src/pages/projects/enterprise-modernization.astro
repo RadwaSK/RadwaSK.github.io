@@ -6,25 +6,58 @@ import '../../styles/global.css';
 const title = 'Enterprise Modernization Multi-Agent System | Radwa Khattab';
 const description =
   'A synthetic portfolio use case: an agentic AI reference architecture for assessing legacy applications against engineering standards using evidence-grounded RAG, LangGraph orchestration, deterministic governance, and human-in-the-loop approval.';
-const canonicalUrl = 'https://radwakhattab.github.io/projects/enterprise-modernization';
-const ogImage = 'https://radwakhattab.github.io/og-image.png';
+const canonicalUrl = 'https://radwask.github.io/projects/enterprise-modernization';
+const ogImage = 'https://radwask.github.io/og-image.png';
 const repoUrl = 'https://github.com/RadwaSK/CDW-UseCase';
 
-const architecturePoints = [
-  'Code and engineering-standard ingestion into a structured knowledge base',
-  'PostgreSQL + pgvector retrieval over ingested standards and application evidence',
-  'Retrieval-augmented generation with evidence explicitly attached to every finding',
-  'File path and line-level citations for traceability back to source',
-  'Parallel architecture and security analyst agents',
-  'A modernization planner agent that synthesizes findings into a plan',
-  'A deterministic evidence reviewer that checks findings against retrieved chunks',
-  'A bounded revision loop, capped rather than open-ended',
-  'LangGraph orchestration across the multi-agent workflow',
-  'Checkpointed pause/resume so long-running assessments can be interrupted safely',
-  'Human approval gate before any consequential action',
-  'Mocked ServiceNow ticket creation for change-management follow-up',
-  'FastAPI backend with a React / TypeScript frontend',
-  'Docker for local/dev environments and GitHub Actions for CI',
+const architectureGroups = [
+  {
+    title: 'Orchestration',
+    points: [
+      'LangGraph orchestration across the multi-agent workflow',
+      'Parallel architecture and security analyst agents',
+      'A modernization planner agent that synthesizes findings into a plan',
+      'A bounded revision loop, capped rather than open-ended',
+    ],
+  },
+  {
+    title: 'Retrieval',
+    points: [
+      'Code and engineering-standard ingestion into a structured knowledge base',
+      'PostgreSQL + pgvector retrieval over ingested standards and application evidence',
+      'Retrieval-augmented generation over the retrieved application and standards evidence',
+    ],
+  },
+  {
+    title: 'Evidence Grounding',
+    points: [
+      'Evidence explicitly attached to every finding',
+      'File path and line-level citations for traceability back to source',
+      'A deterministic evidence reviewer that mechanically checks findings against retrieved chunks',
+    ],
+  },
+  {
+    title: 'Human Control',
+    points: [
+      'Checkpointed workflow state with pause/resume for long-running assessments',
+      'Explicit human approval gate before any consequential action',
+    ],
+  },
+  {
+    title: 'Integration',
+    points: [
+      'FastAPI backend with a React / TypeScript frontend',
+      'Mocked ServiceNow ticket creation for change-management follow-up',
+    ],
+  },
+  {
+    title: 'Engineering',
+    points: [
+      'Docker for local/dev environments',
+      'GitHub Actions for CI, including the evaluation and regression suite',
+      'Audit-oriented tracing of agent runs',
+    ],
+  },
 ];
 
 const governancePoints = [
@@ -97,7 +130,7 @@ const limitations = [
           <span class="case-badge">Synthetic Portfolio Use Case</span>
           <h1>Enterprise Modernization Multi-Agent System</h1>
           <p class="case-lede">
-            A production-oriented agentic AI reference architecture for assessing legacy applications against
+            An enterprise-oriented agentic AI reference architecture for assessing legacy applications against
             engineering standards while keeping evidence, approvals, and consequential actions explicitly
             controlled.
           </p>
@@ -123,29 +156,123 @@ const limitations = [
       <section class="case-section case-section-alt">
         <div class="case-container">
           <h2>Architecture &amp; Technical Highlights</h2>
-          <div class="architecture-diagram" role="img" aria-label="Pipeline: ingestion and retrieval, into parallel analyst agents, into a modernization planner, into a deterministic evidence reviewer with a bounded revision loop, into human approval, into mocked ticket creation.">
-            <div class="diagram-row">
-              <div class="diagram-box">Ingestion<br /><span>Code + Standards</span></div>
-              <div class="diagram-arrow">→</div>
-              <div class="diagram-box">Retrieval<br /><span>PostgreSQL + pgvector</span></div>
-              <div class="diagram-arrow">→</div>
-              <div class="diagram-box">Parallel Agents<br /><span>Architecture · Security</span></div>
+          <div
+            class="architecture-diagram"
+            role="img"
+            aria-label="Two entry paths feed the system: sample repositories and engineering standards are chunked, embedded, and stored in a PostgreSQL + pgvector evidence store; the client React/TypeScript UI calls the FastAPI API, which starts the LangGraph assessment workflow. The workflow retrieves evidence from pgvector, runs architecture and security analyst agents in parallel, passes their findings to a modernization planner, then to a deterministic evidence reviewer, which sends work back to the planner for a bounded, capped number of revisions if evidence is insufficient. The reviewed plan goes to a deterministic approval policy: if no approval is required, it produces the final assessment report directly; if approval is required, a human reviewer approves or rejects it — approval triggers a mocked ServiceNow change-ticket adapter before the final report, rejection goes straight to the final report. Secondary, dashed paths show LangGraph checkpoints and sanitized execution traces persisting in PostgreSQL for resume and audit, and optional LangSmith observability for development and demo use only, with no control over workflow decisions.">
+            <div class="diagram-legend">
+              <span class="legend-item"><span class="legend-swatch legend-solid"></span>Core assessment flow</span>
+              <span class="legend-item"><span class="legend-swatch legend-dashed"></span>Persistence &amp; optional observability — no decision control</span>
             </div>
-            <div class="diagram-row">
-              <div class="diagram-box">Modernization Planner</div>
-              <div class="diagram-arrow">→</div>
-              <div class="diagram-box">Evidence Reviewer<br /><span>deterministic + bounded revision</span></div>
-              <div class="diagram-arrow">→</div>
-              <div class="diagram-box diagram-box-gate">Human Approval</div>
+
+            <div class="diagram-stage">
+              <span class="stage-label">Evidence Ingestion <em>(synthetic sample data)</em></span>
+              <div class="diagram-row">
+                <div class="diagram-box">Sample repositories +<br />engineering standards</div>
+                <div class="diagram-arrow">→</div>
+                <div class="diagram-box">Ingestion pipeline<br /><span>chunking + embeddings</span></div>
+                <div class="diagram-arrow">→</div>
+                <div class="diagram-box diagram-box-store">PostgreSQL + pgvector<br /><span>searchable evidence store</span></div>
+              </div>
             </div>
-            <div class="diagram-row">
-              <div class="diagram-box diagram-box-muted">Mocked ServiceNow Ticket</div>
+
+            <div class="diagram-stage">
+              <span class="stage-label">User Request</span>
+              <div class="diagram-row">
+                <div class="diagram-box">Client React /<br />TypeScript UI</div>
+                <div class="diagram-arrow">→</div>
+                <div class="diagram-box">FastAPI API</div>
+                <div class="diagram-arrow">→</div>
+                <div class="diagram-box">LangGraph<br />assessment workflow</div>
+              </div>
+            </div>
+
+            <div class="diagram-stage">
+              <span class="stage-label">Assessment Workflow (LangGraph)</span>
+              <div class="diagram-row diagram-row-wrap">
+                <div class="diagram-box">Retrieve evidence<br /><span>from pgvector</span></div>
+                <div class="diagram-arrow">→</div>
+                <div class="diagram-box-pair">
+                  <div class="diagram-box">Architecture<br />analyst</div>
+                  <div class="diagram-box">Security<br />analyst</div>
+                </div>
+                <div class="diagram-arrow">→</div>
+                <div class="diagram-box">Modernization<br />planner</div>
+                <div class="diagram-arrow">→</div>
+                <div class="diagram-box">Evidence reviewer<br /><span>deterministic validation</span></div>
+              </div>
+              <div class="diagram-loop">↺ bounded revision loop (capped) back to the planner when evidence is insufficient</div>
+              <div class="diagram-row">
+                <div class="diagram-arrow diagram-arrow-down">↓</div>
+              </div>
+              <div class="diagram-row">
+                <div class="diagram-box diagram-box-gate">Deterministic approval policy</div>
+              </div>
+            </div>
+
+            <div class="diagram-stage">
+              <span class="stage-label">Outcome</span>
+              <div class="outcome-branches">
+                <div class="outcome-branch">
+                  <span class="branch-label">No approval required</span>
+                  <div class="diagram-arrow diagram-arrow-down">↓</div>
+                  <div class="diagram-box diagram-box-muted">Final assessment report</div>
+                </div>
+                <div class="outcome-branch outcome-branch-wide">
+                  <span class="branch-label">Approval required</span>
+                  <div class="diagram-arrow diagram-arrow-down">↓</div>
+                  <div class="diagram-box">Human approval decision</div>
+                  <div class="branch-split">
+                    <div class="branch-split-item">
+                      <span class="branch-label">Approved</span>
+                      <div class="diagram-arrow diagram-arrow-down">↓</div>
+                      <div class="diagram-box">Mocked ServiceNow<br /><span>change-ticket adapter</span></div>
+                      <div class="diagram-arrow diagram-arrow-down">↓</div>
+                      <div class="diagram-box diagram-box-muted">Final assessment report</div>
+                    </div>
+                    <div class="branch-split-item">
+                      <span class="branch-label">Rejected</span>
+                      <div class="diagram-arrow diagram-arrow-down">↓</div>
+                      <div class="diagram-box diagram-box-muted">Final assessment report</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="diagram-stage diagram-stage-secondary">
+              <span class="stage-label">Persistence &amp; Observability <em>(secondary paths)</em></span>
+              <div class="diagram-row diagram-row-wrap">
+                <div class="diagram-box diagram-box-dashed">LangGraph checkpoints<br /><span>resume after approval or recovery</span></div>
+                <div class="diagram-box diagram-box-dashed">Sanitized<br />execution traces</div>
+                <div class="diagram-box diagram-box-dashed diagram-box-store">PostgreSQL<br /><span>assessments, reports, tickets, checkpoints &amp; traces</span></div>
+                <div class="diagram-box diagram-box-dashed diagram-box-optional">LangSmith<br /><span>optional demo/dev observability — no decision control</span></div>
+              </div>
             </div>
           </div>
-          <ul class="feature-list">
-            {architecturePoints.map((point) => <li>{point}</li>)}
-          </ul>
-          <p class="note">Orchestrated end-to-end with LangGraph; all diagrams above reflect the repository's actual pipeline shape.</p>
+          <div class="capability-groups">
+            {architectureGroups.map((group) => (
+              <div class="capability-group">
+                <h3>{group.title}</h3>
+                <ul class="feature-list">
+                  {group.points.map((point) => <li>{point}</li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <p class="note">
+            Orchestrated end-to-end with LangGraph. All sample applications, findings, and evidence shown here are
+            synthetic; the ServiceNow step is a mocked adapter, not a live integration.
+          </p>
+
+          <div class="callout">
+            <span class="callout-label">Key Design Decision</span>
+            <p>
+              I intentionally separated model reasoning from evidence and approval enforcement. Agents can
+              analyze and propose, while deterministic components validate evidence and control consequential
+              actions.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -326,6 +453,52 @@ const limitations = [
     margin-top: 1.25rem;
   }
 
+  .capability-groups {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .capability-group h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a5a8f;
+    margin: 0 0 0.6rem 0;
+  }
+
+  .capability-group .feature-list {
+    gap: 0.5rem;
+  }
+
+  .capability-group .feature-list li {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.85rem;
+  }
+
+  .callout {
+    background: #f0f8ff;
+    border-left: 4px solid #64d5ff;
+    border-radius: 0.5rem;
+    padding: 1.25rem 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .callout-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #1a5a8f;
+    margin-bottom: 0.5rem;
+  }
+
+  .callout p {
+    margin: 0;
+    color: #1a5a8f;
+    line-height: 1.6;
+  }
+
   .architecture-diagram {
     background: #0f0f1e;
     border-radius: 0.75rem;
@@ -333,7 +506,62 @@ const limitations = [
     margin-bottom: 2rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
+  }
+
+  .diagram-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(100, 213, 255, 0.15);
+  }
+
+  .legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: #a0a0b0;
+  }
+
+  .legend-swatch {
+    display: inline-block;
+    width: 1.5rem;
+    height: 0;
+    border-top: 2px solid #64d5ff;
+  }
+
+  .legend-swatch.legend-dashed {
+    border-top-style: dashed;
+    opacity: 0.7;
+  }
+
+  .diagram-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .stage-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #64d5ff;
+  }
+
+  .stage-label em {
+    font-style: normal;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: normal;
+    color: #7a7a90;
+  }
+
+  .diagram-stage-secondary {
+    padding-top: 1rem;
+    border-top: 1px dashed rgba(100, 213, 255, 0.25);
   }
 
   .diagram-row {
@@ -342,6 +570,16 @@ const limitations = [
     justify-content: center;
     flex-wrap: wrap;
     gap: 0.75rem;
+  }
+
+  .diagram-row-wrap {
+    flex-wrap: wrap;
+  }
+
+  .diagram-box-pair {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .diagram-box {
@@ -375,9 +613,71 @@ const limitations = [
     font-style: italic;
   }
 
+  .diagram-box-store {
+    border-color: rgba(100, 213, 255, 0.6);
+    box-shadow: inset 0 0 0 1px rgba(100, 213, 255, 0.15);
+  }
+
+  .diagram-box-dashed {
+    border-style: dashed;
+    background: transparent;
+    opacity: 0.85;
+  }
+
+  .diagram-box-optional {
+    opacity: 0.65;
+  }
+
   .diagram-arrow {
     color: #64d5ff;
     font-size: 1.25rem;
+  }
+
+  .diagram-arrow-down {
+    font-size: 1rem;
+  }
+
+  .diagram-loop {
+    align-self: center;
+    font-size: 0.75rem;
+    color: #a0a0b0;
+    text-align: center;
+    max-width: 30rem;
+  }
+
+  .outcome-branches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.75rem;
+    justify-content: center;
+  }
+
+  .outcome-branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .branch-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #64d5ff;
+  }
+
+  .branch-split {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .branch-split-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
   }
 
   .disclosure-box {
@@ -433,8 +733,17 @@ const limitations = [
       flex-direction: column;
     }
 
-    .diagram-arrow {
+    .diagram-row .diagram-arrow:not(.diagram-arrow-down) {
       transform: rotate(90deg);
+    }
+
+    .outcome-branches,
+    .branch-split {
+      gap: 2rem;
+    }
+
+    .capability-groups {
+      grid-template-columns: 1fr;
     }
   }
 </style>
