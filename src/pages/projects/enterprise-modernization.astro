@@ -1,0 +1,440 @@
+---
+import Header from '../../components/Header.astro';
+import Contact from '../../components/Contact.astro';
+import '../../styles/global.css';
+
+const title = 'Enterprise Modernization Multi-Agent System | Radwa Khattab';
+const description =
+  'A synthetic portfolio use case: an agentic AI reference architecture for assessing legacy applications against engineering standards using evidence-grounded RAG, LangGraph orchestration, deterministic governance, and human-in-the-loop approval.';
+const canonicalUrl = 'https://radwakhattab.github.io/projects/enterprise-modernization';
+const ogImage = 'https://radwakhattab.github.io/og-image.png';
+const repoUrl = 'https://github.com/RadwaSK/CDW-UseCase';
+
+const architecturePoints = [
+  'Code and engineering-standard ingestion into a structured knowledge base',
+  'PostgreSQL + pgvector retrieval over ingested standards and application evidence',
+  'Retrieval-augmented generation with evidence explicitly attached to every finding',
+  'File path and line-level citations for traceability back to source',
+  'Parallel architecture and security analyst agents',
+  'A modernization planner agent that synthesizes findings into a plan',
+  'A deterministic evidence reviewer that checks findings against retrieved chunks',
+  'A bounded revision loop, capped rather than open-ended',
+  'LangGraph orchestration across the multi-agent workflow',
+  'Checkpointed pause/resume so long-running assessments can be interrupted safely',
+  'Human approval gate before any consequential action',
+  'Mocked ServiceNow ticket creation for change-management follow-up',
+  'FastAPI backend with a React / TypeScript frontend',
+  'Docker for local/dev environments and GitHub Actions for CI',
+];
+
+const governancePoints = [
+  'Every finding requires attached evidence — no evidence, no finding',
+  'Citation IDs are mechanically checked against retrieved chunks, not just asserted by the model',
+  'Unsupported claims are removed rather than surfaced to the user',
+  'Approval rules are deterministic (rule-based), not left to LLM judgment',
+  'Any consequential action requires explicit human approval',
+  'Ticket creation is idempotent and fully mocked — no real ticketing system is touched',
+  'Traces stored in PostgreSQL are sanitized before persistence',
+  'LangSmith is used only for development/demo observability, not production monitoring',
+  'Agent work is bounded by retrieval and revision limits to prevent runaway loops',
+];
+
+const evalPoints = [
+  'A golden evaluation dataset of representative assessment scenarios',
+  'Offline, deterministic evaluation — not relying on live LLM judging alone',
+  'CI regression checks that run on relevant changes',
+  'Testing of risk classification against expected outcomes',
+  'Testing of the approval policy logic',
+  'Evidence coverage checks (are findings actually grounded?)',
+  'Tool safety checks around the mocked ticketing action',
+  'GitHub Actions running the evaluation and regression suite',
+  'LangSmith used for development/debugging observability, not as a production SLA metric',
+];
+
+const limitations = [
+  'No production authentication/authorization — this is a demo-grade access model',
+  'Change-management integration (ServiceNow) is mocked end-to-end',
+  'Retrieval corpus is sample-scale, not a full enterprise codebase',
+  'Assessment execution is synchronous in this reference implementation',
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
+
+    <link rel="canonical" href={canonicalUrl} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section class="case-hero">
+        <div class="case-hero-inner">
+          <span class="case-badge">Synthetic Portfolio Use Case</span>
+          <h1>Enterprise Modernization Multi-Agent System</h1>
+          <p class="case-lede">
+            A production-oriented agentic AI reference architecture for assessing legacy applications against
+            engineering standards while keeping evidence, approvals, and consequential actions explicitly
+            controlled.
+          </p>
+          <a class="repo-button" href={repoUrl} target="_blank" rel="noopener noreferrer">View on GitHub</a>
+        </div>
+      </section>
+
+      <section class="case-section">
+        <div class="case-container">
+          <h2>Problem</h2>
+          <p>
+            Automated modernization assessment — using AI to review legacy applications against engineering
+            standards — creates two major risks that most naive implementations ignore:
+          </p>
+          <ol class="problem-list">
+            <li>AI-generated findings may not actually be grounded in source evidence.</li>
+            <li>AI systems should not be allowed to autonomously perform consequential change-management actions.</li>
+          </ol>
+          <p>This system was designed around those two risks from the ground up, rather than bolting on safety after the fact.</p>
+        </div>
+      </section>
+
+      <section class="case-section case-section-alt">
+        <div class="case-container">
+          <h2>Architecture &amp; Technical Highlights</h2>
+          <div class="architecture-diagram" role="img" aria-label="Pipeline: ingestion and retrieval, into parallel analyst agents, into a modernization planner, into a deterministic evidence reviewer with a bounded revision loop, into human approval, into mocked ticket creation.">
+            <div class="diagram-row">
+              <div class="diagram-box">Ingestion<br /><span>Code + Standards</span></div>
+              <div class="diagram-arrow">→</div>
+              <div class="diagram-box">Retrieval<br /><span>PostgreSQL + pgvector</span></div>
+              <div class="diagram-arrow">→</div>
+              <div class="diagram-box">Parallel Agents<br /><span>Architecture · Security</span></div>
+            </div>
+            <div class="diagram-row">
+              <div class="diagram-box">Modernization Planner</div>
+              <div class="diagram-arrow">→</div>
+              <div class="diagram-box">Evidence Reviewer<br /><span>deterministic + bounded revision</span></div>
+              <div class="diagram-arrow">→</div>
+              <div class="diagram-box diagram-box-gate">Human Approval</div>
+            </div>
+            <div class="diagram-row">
+              <div class="diagram-box diagram-box-muted">Mocked ServiceNow Ticket</div>
+            </div>
+          </div>
+          <ul class="feature-list">
+            {architecturePoints.map((point) => <li>{point}</li>)}
+          </ul>
+          <p class="note">Orchestrated end-to-end with LangGraph; all diagrams above reflect the repository's actual pipeline shape.</p>
+        </div>
+      </section>
+
+      <section class="case-section">
+        <div class="case-container">
+          <h2>Governance &amp; Safety</h2>
+          <ul class="feature-list">
+            {governancePoints.map((point) => <li>{point}</li>)}
+          </ul>
+        </div>
+      </section>
+
+      <section class="case-section case-section-alt">
+        <div class="case-container">
+          <h2>Evaluation &amp; LLMOps</h2>
+          <ul class="feature-list">
+            {evalPoints.map((point) => <li>{point}</li>)}
+          </ul>
+        </div>
+      </section>
+
+      <section class="case-section">
+        <div class="case-container">
+          <h2>Limitations &amp; Disclosure</h2>
+          <div class="disclosure-box">
+            <p>
+              <strong>This is a synthetic portfolio use case.</strong> All applications, findings, CMDB context,
+              and change tickets are synthetic. The ServiceNow integration is mocked. It is not customer delivery
+              and does not access or modify real enterprise systems.
+            </p>
+          </div>
+          <p>Additional demo-scope limitations from the repository:</p>
+          <ul class="feature-list">
+            {limitations.map((point) => <li>{point}</li>)}
+          </ul>
+        </div>
+      </section>
+
+      <section class="case-section case-repo-cta">
+        <div class="case-container case-repo-cta-inner">
+          <h2>Repository</h2>
+          <p>Explore the full implementation, including the agent graph, evidence pipeline, and evaluation harness.</p>
+          <a class="repo-button" href={repoUrl} target="_blank" rel="noopener noreferrer">View CDW-UseCase on GitHub</a>
+        </div>
+      </section>
+    </main>
+    <Contact />
+    <footer class="footer">
+      <div class="footer-content">
+        <p>&copy; 2026 Radwa Khattab. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  :global(body) {
+    margin: 0;
+    padding: 0;
+  }
+
+  .case-hero {
+    background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+    color: white;
+    padding: 4.5rem 1.5rem;
+    text-align: center;
+  }
+
+  .case-hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .case-badge {
+    display: inline-block;
+    background: #64d5ff;
+    color: #0f0f1e;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .case-hero h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 1.25rem 0;
+    line-height: 1.2;
+  }
+
+  .case-lede {
+    font-size: 1.15rem;
+    color: #c0c0d0;
+    line-height: 1.6;
+    margin: 0 0 2rem 0;
+  }
+
+  .repo-button {
+    display: inline-block;
+    background: #64d5ff;
+    color: #0f0f1e;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .repo-button:hover {
+    opacity: 0.85;
+  }
+
+  .case-section {
+    padding: 3.5rem 1.5rem;
+    background: white;
+  }
+
+  .case-section-alt {
+    background: #f8f9fa;
+  }
+
+  .case-container {
+    max-width: 850px;
+    margin: 0 auto;
+  }
+
+  .case-section h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #0f0f1e;
+    margin: 0 0 1.25rem 0;
+  }
+
+  .case-section p {
+    color: #444;
+    line-height: 1.7;
+    margin: 0 0 1rem 0;
+  }
+
+  .problem-list {
+    color: #444;
+    line-height: 1.7;
+    padding-left: 1.25rem;
+  }
+
+  .problem-list li {
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .feature-list li {
+    color: #444;
+    line-height: 1.6;
+    padding: 0.75rem 1rem;
+    background: white;
+    border-left: 3px solid #64d5ff;
+    border-radius: 0.35rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .case-section-alt .feature-list li {
+    background: #ffffff;
+  }
+
+  .note {
+    font-size: 0.9rem;
+    color: #888;
+    font-style: italic;
+    margin-top: 1.25rem;
+  }
+
+  .architecture-diagram {
+    background: #0f0f1e;
+    border-radius: 0.75rem;
+    padding: 1.75rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .diagram-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .diagram-box {
+    background: #1a1a2e;
+    border: 1px solid rgba(100, 213, 255, 0.4);
+    color: #e0e0e0;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .diagram-box span {
+    display: block;
+    font-weight: 400;
+    color: #a0a0b0;
+    font-size: 0.75rem;
+    margin-top: 0.15rem;
+  }
+
+  .diagram-box-gate {
+    border-color: #64d5ff;
+    background: rgba(100, 213, 255, 0.15);
+    color: #64d5ff;
+  }
+
+  .diagram-box-muted {
+    opacity: 0.7;
+    font-style: italic;
+  }
+
+  .diagram-arrow {
+    color: #64d5ff;
+    font-size: 1.25rem;
+  }
+
+  .disclosure-box {
+    background: #fff8e1;
+    border-left: 4px solid #e6a817;
+    border-radius: 0.5rem;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .disclosure-box p {
+    margin: 0;
+    color: #6b5a1e;
+  }
+
+  .case-repo-cta {
+    background: #0f0f1e;
+    text-align: center;
+  }
+
+  .case-repo-cta-inner h2 {
+    color: white;
+  }
+
+  .case-repo-cta-inner p {
+    color: #c0c0d0;
+    margin-bottom: 1.75rem;
+  }
+
+  .footer {
+    background: #0f0f1e;
+    color: #b0b0c0;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border-top: 1px solid rgba(100, 213, 255, 0.2);
+  }
+
+  .footer p {
+    margin: 0;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    .case-hero {
+      padding: 3rem 1.5rem;
+    }
+
+    .case-hero h1 {
+      font-size: 1.85rem;
+    }
+
+    .diagram-row {
+      flex-direction: column;
+    }
+
+    .diagram-arrow {
+      transform: rotate(90deg);
+    }
+  }
+</style>

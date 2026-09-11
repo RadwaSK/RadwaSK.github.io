@@ -1,0 +1,393 @@
+---
+import Header from '../../components/Header.astro';
+import Contact from '../../components/Contact.astro';
+import '../../styles/global.css';
+
+const title = 'RiverPay — Financial Exception Review Workflow | Radwa Khattab';
+const description =
+  'A synthetic portfolio use case: a workflow-automation prototype where an LLM gathers evidence and calls read-only investigation tools while deterministic policy logic remains authoritative for the final financial-risk decision.';
+const canonicalUrl = 'https://radwakhattab.github.io/projects/riverpay';
+const ogImage = 'https://radwakhattab.github.io/og-image.png';
+const repoUrl = 'https://github.com/RadwaSK/RiverPay-UseCase';
+
+const architecturePoints = [
+  'Python + n8n workflow orchestration',
+  'An investigation agent that gathers evidence before any decision is proposed',
+  'Customer lookup tool',
+  'Transaction lookup tool',
+  'Sanctions checks',
+  'Duplicate detection',
+  'Recent-transfer checks',
+  'KYC tier rules',
+  'Transaction-policy rules',
+  'Structured outputs for downstream policy evaluation',
+  'Dockerized local execution',
+];
+
+const governancePoints = [
+  'Policy-based deterministic logic performs the final evaluation, not the LLM',
+  'Investigation tools are isolated and scoped to a single purpose each',
+  'All data access from the agent is read-only',
+  'Uncertain or risky cases are escalated to a human rather than auto-resolved',
+  'Escalations route to Fraud Ops, Compliance, Tech/Recon, or Agent Network depending on issue type',
+  'Decisions are structured to be audit-oriented',
+  'A deterministic evaluation report is produced for review',
+  'Residual risk is analyzed and surfaced rather than hidden',
+];
+
+const notImplemented = [
+  'Real money movement',
+  'Automatic retries',
+  'KYC approval',
+  'Sanctions clearance',
+  'Production banking integrations',
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
+
+    <link rel="canonical" href={canonicalUrl} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section class="case-hero">
+        <div class="case-hero-inner">
+          <span class="case-badge">Synthetic Portfolio Use Case</span>
+          <h1>RiverPay — Financial Exception Review Workflow</h1>
+          <p class="case-lede">
+            A workflow-oriented financial risk prototype showing how an LLM can gather evidence and use
+            investigation tools while deterministic policy logic remains authoritative for the final decision.
+          </p>
+          <a class="repo-button" href={repoUrl} target="_blank" rel="noopener noreferrer">View on GitHub</a>
+        </div>
+      </section>
+
+      <section class="case-section">
+        <div class="case-container">
+          <h2>Problem</h2>
+          <p>
+            This use case explores automating payment-exception review to reduce manual investigation effort —
+            without allowing an LLM to make uncontrolled financial or compliance decisions on its own.
+          </p>
+        </div>
+      </section>
+
+      <section class="case-section case-section-alt">
+        <div class="case-container">
+          <h2>Architecture &amp; Technical Highlights</h2>
+          <div class="architecture-diagram" role="img" aria-label="Investigation agent calls read-only tools including customer lookup, transaction lookup, sanctions checks, duplicate detection, and recent-transfer checks; proposes a decision; deterministic policy logic recomputes precedence and is authoritative for the final decision.">
+            <div class="diagram-row">
+              <div class="diagram-box">Investigation Agent<br /><span>LLM, read-only tools</span></div>
+              <div class="diagram-arrow">→</div>
+              <div class="diagram-box">Proposed Decision</div>
+              <div class="diagram-arrow">→</div>
+              <div class="diagram-box diagram-box-gate">Deterministic Policy Logic<br /><span>authoritative</span></div>
+            </div>
+          </div>
+          <p class="hybrid-note">
+            The LLM gathers evidence, calls scoped read-only tools, and proposes a decision. Deterministic policy
+            logic recomputes precedence and remains authoritative.
+          </p>
+          <ul class="feature-list">
+            {architecturePoints.map((point) => <li>{point}</li>)}
+          </ul>
+        </div>
+      </section>
+
+      <section class="case-section">
+        <div class="case-container">
+          <h2>Governance &amp; Evaluation</h2>
+          <ul class="feature-list">
+            {governancePoints.map((point) => <li>{point}</li>)}
+          </ul>
+          <p class="note">No compliance certification is claimed for this workflow.</p>
+        </div>
+      </section>
+
+      <section class="case-section case-section-alt">
+        <div class="case-container">
+          <h2>Limitations &amp; Disclosure</h2>
+          <div class="disclosure-box">
+            <p>
+              <strong>This is a synthetic portfolio/technical use case.</strong> It does not process real banking
+              transactions or customer data and is not deployed in a financial institution.
+            </p>
+          </div>
+          <p>This workflow does not implement:</p>
+          <ul class="feature-list">
+            {notImplemented.map((point) => <li>{point}</li>)}
+          </ul>
+        </div>
+      </section>
+
+      <section class="case-section case-repo-cta">
+        <div class="case-container case-repo-cta-inner">
+          <h2>Repository</h2>
+          <p>Explore the full n8n workflow, investigation tools, and policy evaluation logic.</p>
+          <a class="repo-button" href={repoUrl} target="_blank" rel="noopener noreferrer">View RiverPay-UseCase on GitHub</a>
+        </div>
+      </section>
+    </main>
+    <Contact />
+    <footer class="footer">
+      <div class="footer-content">
+        <p>&copy; 2026 Radwa Khattab. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  :global(body) {
+    margin: 0;
+    padding: 0;
+  }
+
+  .case-hero {
+    background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+    color: white;
+    padding: 4.5rem 1.5rem;
+    text-align: center;
+  }
+
+  .case-hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .case-badge {
+    display: inline-block;
+    background: #64d5ff;
+    color: #0f0f1e;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .case-hero h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 1.25rem 0;
+    line-height: 1.2;
+  }
+
+  .case-lede {
+    font-size: 1.15rem;
+    color: #c0c0d0;
+    line-height: 1.6;
+    margin: 0 0 2rem 0;
+  }
+
+  .repo-button {
+    display: inline-block;
+    background: #64d5ff;
+    color: #0f0f1e;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .repo-button:hover {
+    opacity: 0.85;
+  }
+
+  .case-section {
+    padding: 3.5rem 1.5rem;
+    background: white;
+  }
+
+  .case-section-alt {
+    background: #f8f9fa;
+  }
+
+  .case-container {
+    max-width: 850px;
+    margin: 0 auto;
+  }
+
+  .case-section h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #0f0f1e;
+    margin: 0 0 1.25rem 0;
+  }
+
+  .case-section p {
+    color: #444;
+    line-height: 1.7;
+    margin: 0 0 1rem 0;
+  }
+
+  .hybrid-note {
+    background: #f0f8ff;
+    border-left: 4px solid #64d5ff;
+    padding: 1rem 1.25rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    color: #1a5a8f;
+  }
+
+  .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .feature-list li {
+    color: #444;
+    line-height: 1.6;
+    padding: 0.75rem 1rem;
+    background: white;
+    border-left: 3px solid #64d5ff;
+    border-radius: 0.35rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .note {
+    font-size: 0.9rem;
+    color: #888;
+    font-style: italic;
+    margin-top: 1.25rem;
+  }
+
+  .architecture-diagram {
+    background: #0f0f1e;
+    border-radius: 0.75rem;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .diagram-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .diagram-box {
+    background: #1a1a2e;
+    border: 1px solid rgba(100, 213, 255, 0.4);
+    color: #e0e0e0;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .diagram-box span {
+    display: block;
+    font-weight: 400;
+    color: #a0a0b0;
+    font-size: 0.75rem;
+    margin-top: 0.15rem;
+  }
+
+  .diagram-box-gate {
+    border-color: #64d5ff;
+    background: rgba(100, 213, 255, 0.15);
+    color: #64d5ff;
+  }
+
+  .diagram-arrow {
+    color: #64d5ff;
+    font-size: 1.25rem;
+  }
+
+  .disclosure-box {
+    background: #fff8e1;
+    border-left: 4px solid #e6a817;
+    border-radius: 0.5rem;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .disclosure-box p {
+    margin: 0;
+    color: #6b5a1e;
+  }
+
+  .case-repo-cta {
+    background: #0f0f1e;
+    text-align: center;
+  }
+
+  .case-repo-cta-inner h2 {
+    color: white;
+  }
+
+  .case-repo-cta-inner p {
+    color: #c0c0d0;
+    margin-bottom: 1.75rem;
+  }
+
+  .footer {
+    background: #0f0f1e;
+    color: #b0b0c0;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border-top: 1px solid rgba(100, 213, 255, 0.2);
+  }
+
+  .footer p {
+    margin: 0;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    .case-hero {
+      padding: 3rem 1.5rem;
+    }
+
+    .case-hero h1 {
+      font-size: 1.85rem;
+    }
+
+    .diagram-row {
+      flex-direction: column;
+    }
+
+    .diagram-arrow {
+      transform: rotate(90deg);
+    }
+  }
+</style>
