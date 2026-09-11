@@ -159,94 +159,133 @@ const limitations = [
           <div
             class="architecture-diagram"
             role="img"
-            aria-label="Two entry paths feed the system: sample repositories and engineering standards are chunked, embedded, and stored in a PostgreSQL + pgvector evidence store; the client React/TypeScript UI calls the FastAPI API, which starts the LangGraph assessment workflow. The workflow retrieves evidence from pgvector, runs architecture and security analyst agents in parallel, passes their findings to a modernization planner, then to a deterministic evidence reviewer, which sends work back to the planner for a bounded, capped number of revisions if evidence is insufficient. The reviewed plan goes to a deterministic approval policy: if no approval is required, it produces the final assessment report directly; if approval is required, a human reviewer approves or rejects it — approval triggers a mocked ServiceNow change-ticket adapter before the final report, rejection goes straight to the final report. Secondary, dashed paths show LangGraph checkpoints and sanitized execution traces persisting in PostgreSQL for resume and audit, and optional LangSmith observability for development and demo use only, with no control over workflow decisions.">
+            aria-label="The system has a preparation layer and a runtime workflow. Knowledge base layer, indexed before any assessment runs: sample code and engineering standards are chunked, embedded, and stored in PostgreSQL with the pgvector extension as a searchable evidence store. Request entry: a React and TypeScript client calls a FastAPI API, which starts one LangGraph run. Assessment workflow, a stateful checkpointed LangGraph: from START the run retrieves top-k evidence from pgvector, then fans out to an architecture agent and a security agent that run in parallel, then fans back in to a modernization planner, whose plan goes to a deterministic evidence reviewer that mechanically validates citations against the retrieved evidence and is not an LLM. If the reviewer requests changes, the plan returns to the modernization planner for at most one revision and then passes through the reviewer again. Once validated, the run reaches a deterministic approval gate. If the policy does not require approval, the run continues straight to the report with no human pause and no ticket. If the policy does require approval, the run pauses on a checkpoint for a human decision: on approval it creates a mocked ServiceNow change ticket, a simulated adapter that calls no real system, and then continues to the report; on rejection no ticket is created and the run continues to the report. All paths converge on a single auditable report, then END. Secondary dashed paths: LangGraph checkpoints and sanitized execution traces persist in PostgreSQL alongside assessments, reports, and tickets, and LangSmith provides optional development and demo observability with no control over workflow decisions.">
             <div class="diagram-legend">
-              <span class="legend-item"><span class="legend-swatch legend-solid"></span>Core assessment flow</span>
+              <span class="legend-item"><span class="legend-swatch legend-solid"></span>Assessment flow</span>
               <span class="legend-item"><span class="legend-swatch legend-dashed"></span>Persistence &amp; optional observability — no decision control</span>
             </div>
 
             <div class="diagram-stage">
-              <span class="stage-label">Evidence Ingestion <em>(synthetic sample data)</em></span>
+              <span class="stage-label">Knowledge / Retrieval <em>(indexed ahead of any assessment)</em></span>
               <div class="diagram-row">
-                <div class="diagram-box">Sample repositories +<br />engineering standards</div>
+                <div class="diagram-box">Code +<br />engineering standards<span>synthetic sample apps</span></div>
                 <div class="diagram-arrow">→</div>
-                <div class="diagram-box">Ingestion pipeline<br /><span>chunking + embeddings</span></div>
+                <div class="diagram-box">Ingestion +<br />embeddings<span>chunking</span></div>
                 <div class="diagram-arrow">→</div>
-                <div class="diagram-box diagram-box-store">PostgreSQL + pgvector<br /><span>searchable evidence store</span></div>
+                <div class="diagram-box diagram-box-store">PostgreSQL + pgvector<span>searchable evidence store</span></div>
               </div>
             </div>
 
             <div class="diagram-stage">
-              <span class="stage-label">User Request</span>
+              <span class="stage-label">Request Entry</span>
               <div class="diagram-row">
                 <div class="diagram-box">Client React /<br />TypeScript UI</div>
                 <div class="diagram-arrow">→</div>
                 <div class="diagram-box">FastAPI API</div>
                 <div class="diagram-arrow">→</div>
-                <div class="diagram-box">LangGraph<br />assessment workflow</div>
+                <div class="diagram-box">starts one<br />LangGraph run</div>
               </div>
             </div>
 
             <div class="diagram-stage">
-              <span class="stage-label">Assessment Workflow (LangGraph)</span>
-              <div class="diagram-row diagram-row-wrap">
-                <div class="diagram-box">Retrieve evidence<br /><span>from pgvector</span></div>
-                <div class="diagram-arrow">→</div>
-                <div class="diagram-box-pair">
-                  <div class="diagram-box">Architecture<br />analyst</div>
-                  <div class="diagram-box">Security<br />analyst</div>
-                </div>
-                <div class="diagram-arrow">→</div>
-                <div class="diagram-box">Modernization<br />planner</div>
-                <div class="diagram-arrow">→</div>
-                <div class="diagram-box">Evidence reviewer<br /><span>deterministic validation</span></div>
-              </div>
-              <div class="diagram-loop">↺ bounded revision loop (capped) back to the planner when evidence is insufficient</div>
-              <div class="diagram-row">
-                <div class="diagram-arrow diagram-arrow-down">↓</div>
-              </div>
-              <div class="diagram-row">
-                <div class="diagram-box diagram-box-gate">Deterministic approval policy</div>
-              </div>
-            </div>
+              <span class="stage-label">Agent Workflow <em>(LangGraph — stateful &amp; checkpointed)</em></span>
+              <div class="diagram-flow">
+                <div class="diagram-box flow-terminal">START</div>
+                <span class="flow-line flow-line-arrow"></span>
+                <div class="diagram-box">Retrieve evidence<span>top-k from the pgvector store above</span></div>
 
-            <div class="diagram-stage">
-              <span class="stage-label">Outcome</span>
-              <div class="outcome-branches">
-                <div class="outcome-branch">
-                  <span class="branch-label">No approval required</span>
-                  <div class="diagram-arrow diagram-arrow-down">↓</div>
-                  <div class="diagram-box diagram-box-muted">Final assessment report</div>
-                </div>
-                <div class="outcome-branch outcome-branch-wide">
-                  <span class="branch-label">Approval required</span>
-                  <div class="diagram-arrow diagram-arrow-down">↓</div>
-                  <div class="diagram-box">Human approval decision</div>
-                  <div class="branch-split">
-                    <div class="branch-split-item">
-                      <span class="branch-label">Approved</span>
-                      <div class="diagram-arrow diagram-arrow-down">↓</div>
-                      <div class="diagram-box">Mocked ServiceNow<br /><span>change-ticket adapter</span></div>
-                      <div class="diagram-arrow diagram-arrow-down">↓</div>
-                      <div class="diagram-box diagram-box-muted">Final assessment report</div>
-                    </div>
-                    <div class="branch-split-item">
-                      <span class="branch-label">Rejected</span>
-                      <div class="diagram-arrow diagram-arrow-down">↓</div>
-                      <div class="diagram-box diagram-box-muted">Final assessment report</div>
-                    </div>
+                <span class="flow-line"></span>
+                <span class="flow-label">fan out — both analysts run in parallel</span>
+                <span class="flow-line"></span>
+                <div class="flow-split-rail"></div>
+                <div class="flow-split-cols">
+                  <div class="flow-col">
+                    <span class="flow-line flow-line-arrow"></span>
+                    <div class="diagram-box">Architecture agent</div>
+                    <span class="flow-line flow-line-grow"></span>
+                  </div>
+                  <div class="flow-col">
+                    <span class="flow-line flow-line-arrow"></span>
+                    <div class="diagram-box">Security agent</div>
+                    <span class="flow-line flow-line-grow"></span>
                   </div>
                 </div>
+                <div class="flow-split-rail"></div>
+                <span class="flow-line"></span>
+                <span class="flow-label">fan in — the planner waits for both</span>
+                <span class="flow-line flow-line-arrow"></span>
+
+                <div class="loop-group">
+                  <div class="loop-body">
+                    <div class="loop-return" aria-hidden="true"></div>
+                    <div class="loop-main">
+                      <div class="diagram-box">Modernization planner</div>
+                      <span class="flow-line flow-line-arrow"></span>
+                      <div class="diagram-box">Deterministic evidence reviewer<span>citation + evidence validation — rule-based, not an LLM</span></div>
+                    </div>
+                  </div>
+                  <span class="flow-label loop-label">↺ revise · max 1 — the reviewer returns the plan to the planner, which then passes back through the reviewer</span>
+                </div>
+
+                <span class="flow-line"></span>
+                <span class="flow-label">validated</span>
+                <span class="flow-line flow-line-arrow"></span>
+
+                <div class="diagram-box diagram-box-gate">Approval gate<span>deterministic policy decides whether a human is needed</span></div>
+                <span class="flow-line"></span>
+                <div class="flow-split-rail"></div>
+                <div class="flow-split-cols">
+                  <div class="flow-col">
+                    <span class="flow-line flow-line-arrow"></span>
+                    <span class="flow-label">approval not required</span>
+                    <span class="flow-line flow-line-arrow"></span>
+                    <div class="diagram-box diagram-box-ghost">no pause · no ticket</div>
+                    <span class="flow-line flow-line-grow"></span>
+                  </div>
+                  <div class="flow-col">
+                    <span class="flow-line flow-line-arrow"></span>
+                    <span class="flow-label">approval required</span>
+                    <span class="flow-line flow-line-arrow"></span>
+                    <div class="diagram-box">Human decision<span>run pauses on a checkpoint until a person responds</span></div>
+                    <span class="flow-line"></span>
+                    <div class="flow-split-rail"></div>
+                    <div class="flow-split-cols">
+                      <div class="flow-col">
+                        <span class="flow-line flow-line-arrow"></span>
+                        <span class="flow-label">approve</span>
+                        <span class="flow-line flow-line-arrow"></span>
+                        <div class="diagram-box">Mocked ServiceNow ticket<span>simulated adapter — no real system is called</span></div>
+                        <span class="flow-line flow-line-grow"></span>
+                      </div>
+                      <div class="flow-col">
+                        <span class="flow-line flow-line-arrow"></span>
+                        <span class="flow-label">reject</span>
+                        <span class="flow-line flow-line-arrow"></span>
+                        <div class="diagram-box diagram-box-ghost">no ticket</div>
+                        <span class="flow-line flow-line-grow"></span>
+                      </div>
+                    </div>
+                    <div class="flow-split-rail"></div>
+                    <span class="flow-line flow-line-grow"></span>
+                  </div>
+                </div>
+                <div class="flow-split-rail"></div>
+                <span class="flow-line"></span>
+                <span class="flow-label">every path converges</span>
+                <span class="flow-line flow-line-arrow"></span>
+                <div class="diagram-box">Report<span>auditable assessment report</span></div>
+                <span class="flow-line flow-line-arrow"></span>
+                <div class="diagram-box flow-terminal">END</div>
               </div>
             </div>
 
             <div class="diagram-stage diagram-stage-secondary">
               <span class="stage-label">Persistence &amp; Observability <em>(secondary paths)</em></span>
               <div class="diagram-row diagram-row-wrap">
-                <div class="diagram-box diagram-box-dashed">LangGraph checkpoints<br /><span>resume after approval or recovery</span></div>
+                <div class="diagram-box diagram-box-dashed">LangGraph checkpoints<span>pause at approval, resume on decision</span></div>
                 <div class="diagram-box diagram-box-dashed">Sanitized<br />execution traces</div>
-                <div class="diagram-box diagram-box-dashed diagram-box-store">PostgreSQL<br /><span>assessments, reports, tickets, checkpoints &amp; traces</span></div>
-                <div class="diagram-box diagram-box-dashed diagram-box-optional">LangSmith<br /><span>optional demo/dev observability — no decision control</span></div>
+                <div class="diagram-box diagram-box-dashed diagram-box-store">PostgreSQL<span>assessments, reports, tickets, checkpoints &amp; traces</span></div>
+                <div class="diagram-box diagram-box-dashed diagram-box-optional">LangSmith<span>optional demo/dev observability — no decision control</span></div>
               </div>
             </div>
           </div>
@@ -261,8 +300,9 @@ const limitations = [
             ))}
           </div>
           <p class="note">
-            Orchestrated end-to-end with LangGraph. All sample applications, findings, and evidence shown here are
-            synthetic; the ServiceNow step is a mocked adapter, not a live integration.
+            The diagram mirrors the graph implemented in the repository — the same nodes, the same fan-out/fan-in,
+            the same conditional edges. All sample applications, findings, and evidence are synthetic; the
+            ServiceNow step is a mocked adapter, not a live integration.
           </p>
 
           <div class="callout">
@@ -507,6 +547,7 @@ const limitations = [
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    overflow-x: auto;
   }
 
   .diagram-legend {
@@ -576,12 +617,6 @@ const limitations = [
     flex-wrap: wrap;
   }
 
-  .diagram-box-pair {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
   .diagram-box {
     background: #1a1a2e;
     border: 1px solid rgba(100, 213, 255, 0.4);
@@ -592,6 +627,8 @@ const limitations = [
     font-weight: 600;
     text-align: center;
     line-height: 1.4;
+    max-width: 100%;
+    overflow-wrap: break-word;
   }
 
   .diagram-box span {
@@ -606,11 +643,6 @@ const limitations = [
     border-color: #64d5ff;
     background: rgba(100, 213, 255, 0.15);
     color: #64d5ff;
-  }
-
-  .diagram-box-muted {
-    opacity: 0.7;
-    font-style: italic;
   }
 
   .diagram-box-store {
@@ -633,51 +665,148 @@ const limitations = [
     font-size: 1.25rem;
   }
 
-  .diagram-arrow-down {
-    font-size: 1rem;
+  .diagram-box-ghost {
+    border-style: dashed;
+    border-color: rgba(100, 213, 255, 0.25);
+    background: transparent;
+    color: #8a8a9e;
+    font-weight: 400;
+    font-style: italic;
   }
 
-  .diagram-loop {
-    align-self: center;
-    font-size: 0.75rem;
-    color: #a0a0b0;
-    text-align: center;
-    max-width: 30rem;
-  }
-
-  .outcome-branches {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.75rem;
-    justify-content: center;
-  }
-
-  .outcome-branch {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  .branch-label {
+  .flow-terminal {
+    border-radius: 1rem;
+    border-color: rgba(100, 213, 255, 0.3);
+    background: transparent;
+    color: #8a8a9e;
     font-size: 0.7rem;
     font-weight: 700;
-    letter-spacing: 0.02em;
-    color: #64d5ff;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 1rem;
   }
 
-  .branch-split {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .branch-split-item {
+  /* Vertical workflow flow: boxes stacked with drawn connectors between them. */
+  .diagram-flow {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.4rem;
+    width: 100%;
+  }
+
+  .flow-line {
+    width: 2px;
+    height: 1.1rem;
+    background: rgba(100, 213, 255, 0.45);
+    flex: none;
+  }
+
+  .flow-line-arrow {
+    position: relative;
+  }
+
+  .flow-line-arrow::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 7px solid rgba(100, 213, 255, 0.7);
+  }
+
+  /* Stretches to pull a short branch down to the convergence rail. */
+  .flow-line-grow {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 1.1rem;
+  }
+
+  /* Horizontal rail that fans branches out or merges them back in. */
+  .flow-split-rail {
+    width: 52%;
+    height: 2px;
+    background: rgba(100, 213, 255, 0.45);
+    flex: none;
+  }
+
+  .flow-split-cols {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+    gap: 1.5rem;
+  }
+
+  .flow-col {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .flow-label {
+    font-size: 0.68rem;
+    color: #a0a0b0;
+    background: rgba(100, 213, 255, 0.08);
+    border: 1px solid rgba(100, 213, 255, 0.18);
+    padding: 0.2rem 0.6rem;
+    border-radius: 1rem;
+    text-align: center;
+    max-width: 100%;
+    line-height: 1.4;
+  }
+
+  /* Bounded revision loop: a return bracket from the reviewer back up to the planner. */
+  .loop-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .loop-body {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    max-width: 100%;
+  }
+
+  .loop-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .loop-return {
+    width: 1.6rem;
+    margin-right: 0.6rem;
+    flex: none;
+    border: 2px solid rgba(100, 213, 255, 0.5);
+    border-right: none;
+    border-radius: 0.6rem 0 0 0.6rem;
+    position: relative;
+  }
+
+  .loop-return::after {
+    content: "";
+    position: absolute;
+    top: -4px;
+    right: -8px;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 8px solid rgba(100, 213, 255, 0.75);
+  }
+
+  .loop-label {
+    margin-top: 0.6rem;
+    max-width: 34rem;
   }
 
   .disclosure-box {
@@ -733,13 +862,40 @@ const limitations = [
       flex-direction: column;
     }
 
-    .diagram-row .diagram-arrow:not(.diagram-arrow-down) {
+    .diagram-row .diagram-arrow {
       transform: rotate(90deg);
     }
 
-    .outcome-branches,
-    .branch-split {
-      gap: 2rem;
+    .architecture-diagram {
+      padding: 1.25rem 1rem;
+    }
+
+    /* Branches stack vertically; the rails that only make sense side-by-side
+       drop away, and each branch becomes a clearly outlined group instead. */
+    .flow-split-cols {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .flow-split-rail {
+      display: none;
+    }
+
+    .flow-split-cols > .flow-col {
+      border: 1px dashed rgba(100, 213, 255, 0.22);
+      border-radius: 0.6rem;
+      padding: 0.85rem 0.6rem;
+    }
+
+    .flow-line-grow {
+      flex: none;
+      height: 1.1rem;
+    }
+
+    /* The return bracket needs the two boxes side by side to read correctly,
+       so on mobile the loop is carried by its label alone. */
+    .loop-return {
+      display: none;
     }
 
     .capability-groups {
